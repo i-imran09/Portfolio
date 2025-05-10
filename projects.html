@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imran.I - Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #007bff;
+            --secondary: #0056b3;
+            --text: #2d2e32;
+            --background: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.5rem 10%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Project Sections */
+        .project-section {
+            padding: 8rem 10% 4rem;
+            scroll-margin-top: 6rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        /* Project Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .gradient-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(0,123,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .tech-pill {
+            background: rgba(0,123,255,0.1);
+            color: var(--primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-pill:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Demo Button */
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 3rem auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            left: -100%;
+            top: 0;
+            transition: left 0.4s ease;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+        }
+
+        .demo-btn:hover::after {
+            left: 100%;
+        }
+
+        .demo-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Architecture Diagram */
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+
+        .layer {
+            background: rgba(0,123,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .layer:hover {
+            transform: translateX(10px);
+        }
+
+        /* Template Showcase */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .template-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-section {
+                padding: 6rem 5% 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+        }
+        /* ===== Expense Tracker Additions ===== */
+.feature-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-list {
+    list-style: none;
+    line-height: 2;
+    margin-left: 1rem;
+}
+
+.feature-list li::before {
+    content: "▹";
+    color: var(--primary);
+    margin-right: 0.8rem;
+}
+
+.special-features {
+    background: rgba(0,123,255,0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.admin-portal {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.portal-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.portal-card {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.portal-card:hover {
+    transform: translateY(-3px);
+}
+
+.portal-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.bonus-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.bonus-item:hover {
+    transform: translateX(5px);
+}
+
+/* ===== Web App Builder Additions ===== */
+.project-overview {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.project-overview ul {
+    padding-left: 2rem;
+    margin: 1rem 0;
+    list-style-type: circle;
+}
+
+.tab-system {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.feature-item {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-3px);
+}
+
+.component-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.component-visual {
+    background: var(--background);
+    border-radius: 12px;
+    min-height: 200px;
+}
+
+/* ===== Video Recorder Additions ===== */
+.tech-badge {
+    background: rgba(0,123,255,0.1);
+    color: var(--primary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    margin: 0 0.5rem 0.5rem 0;
+    display: inline-block;
+}
+
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.spec-item {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.spec-item:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+    .component-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .portal-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .special-features {
+        padding: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Expense Tracker Section -->
+    <section class="project-section">
+        <div class="section-header">
+            <h2 class="section-title">Expense Tracker</h2>
+            <p class="section-description">Expense tracking and Management System</p>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-pill">Html</div>
+            <div class="tech-pill">Css</div>
+            <div class="tech-pill">Java Script</div>
+            <div class="tech-pill">Chart.js</div>
+            <div class="tech-pill">Firebase</div>
+            <div class="tech-pill">Chart.js</div>
+            <div class="tech-pill">Api </div>
+
+        </div>
+        
+                <div class="feature-grid">
+                    <!-- Core Features Column -->
+                    <div class="feature-column">
+                        <div class="feature-card gradient-card">
+                            <div class="card-header">
+                                <div class="card-icon">💰</div>
+                                <h3>Core Financial Features</h3>
+                            </div>
+                            <ul class="feature-list">
+                                <li>📂 Multi-category expense tracking</li>
+                                <li>💰 Salary monitoring & balance calculations</li>
+                                <li>📊 Interactive financial dashboards</li>
+                                <li>✅ Integrated To-Do system</li>
+                            </ul>
+                        </div>
+        
+                        <div class="feature-card gradient-card">
+                            <div class="card-header">
+                                <div class="card-icon">🛡️</div>
+                                <h3>Security Architecture</h3>
+                            </div>
+                            <ul class="feature-list">
+                                <li>Firebase Authentication</li>
+                                <li>Role-based access control</li>
+                                <li>End-to-end data encryption</li>
+                                <li>OTP verification system</li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <!-- Advanced Features Column -->
+                    <div class="feature-column">
+                        <div class="feature-card gradient-card">
+                            <div class="card-header">
+                                <div class="card-icon">🤖</div>
+                                <h3> Smart Assistant</h3>
+                            </div>
+                            <ul class="feature-list">
+                                <li>Natural language queries</li>
+                                <li>Quick-edit commands</li>
+                            </ul>
+                        </div>
+        
+                        <div class="feature-card gradient-card">
+                            <div class="card-header">
+                                <div class="card-icon">📱</div>
+                                <h3>Mobile-First Experience</h3>
+                            </div>
+                            <ul class="feature-list">
+                                <li>Responsive bottom navigation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Admin & Bonus Features -->
+            <div class="special-features">
+                <div class="admin-portal">
+                    <h3 class="portal-title">Admin Portal</h3>
+                    <div class="portal-features">
+                        <div class="portal-card">
+                            <div class="portal-icon">👥</div>
+                            <h4>User Management</h4>
+                            <p>Adding User<br>Activity monitoring</p>
+                        </div>
+                        <div class="portal-card">
+                            <div class="portal-icon">📊</div>
+                            <h4>Financial Oversight</h4>
+                            <p>Organization-wide analytics<br>Export-ready reports</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="bonus-features">
+                    <h3>Premium Enhancements</h3>
+                    <div class="bonus-grid">
+                        <div class="bonus-item">
+                            <span class="bonus-badge">🎨</span>
+                            <span>Animated Splash Screens</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="https://i-imran09.github.io/Expense-Tracker/" class="demo-btn">
+                <i class="fas fa-rocket"></i>
+                Live Demo
+            </a>
+        </section>
+        <hr>
+
+<!-- Web Application Builder Section -->
+<section class="project-section">
+    <div class="section-header">
+        <h2 class="section-title">🌐 Web Application Builder</h2>
+        <p class="section-description">No-Code Development Platform</p>
+    </div>
+
+    <div class="tech-stack">
+        <div class="tech-pill">HTML5</div>
+        <div class="tech-pill">CSS3</div>
+        <div class="tech-pill">JavaScript</div>
+        <div class="tech-pill">JSZip/FileSaver.js</div>
+        <div class="tech-pill">Firebase</div>
+    </div>
+
+    <div class="gradient-card project-overview">
+        <div class="card-header">
+            <div class="card-icon">🌍</div>
+            <h3>Project Overview</h3>
+        </div>
+        <p>A powerful no-code platform that enables users to:</p>
+        <ul class="feature-list">
+            <li>🔐 Authenticate with Firebase</li>
+            <li>🚀 Generate apps from templates</li>
+            <li>👀 Real-time preview & editing</li>
+            <li>📥 Instant ZIP downloads</li>
+            <li>✏️ Split-view code editor</li>
+        </ul>
+    </div>
+
+    <div class="technical-deep-dive">
+        <div class="gradient-card tab-system">
+            <div class="feature-category active">
+                <div class="card-header">
+                    <div class="card-icon">✨</div>
+                    <h3>Key Features</h3>
+                </div>
+                <div class="feature-grid">
+                    <div class="gradient-card feature-item">
+                        <div class="card-header">
+                            <div class="card-icon">📁</div>
+                            <h4>10+ App Templates</h4>
+                        </div>
+                        <p>Pre-built apps like Calculator, Portfolio, To-Do List and more</p>
+                    </div>
+                    <div class="gradient-card feature-item">
+                        <div class="card-header">
+                            <div class="card-icon">👀</div>
+                            <h4>Live Preview</h4>
+                        </div>
+                        <p>Instant app rendering with real-time updates</p>
+                    </div>
+                    <div class="gradient-card feature-item">
+                        <div class="card-header">
+                            <div class="card-icon">📤</div>
+                            <h4>Export as ZIP</h4>
+                        </div>
+                        <p>Download your customized app files instantly</p>
+                    </div>
+                    <div class="gradient-card feature-item">
+                        <div class="card-header">
+                            <div class="card-icon">✏️</div>
+                            <h4>Live Pan Editor</h4>
+                        </div>
+                        <p>Customize template designs easily</p>
+                    </div>
+                    <div class="gradient-card feature-item">
+                        <div class="card-header">
+                            <div class="card-icon">📱</div>
+                            <h4>Responsive UI</h4>
+                        </div>
+                        <p>Optimized for all screen sizes with smooth transitions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gradient-card template-showcase">
+        <div class="card-header">
+            <div class="card-icon">🎨</div>
+            <h3>Template Gallery</h3>
+        </div>
+        <div class="template-grid">
+            <div class="gradient-card template-card calculator">
+                <h4>🧮 Calculator</h4>
+                <p>➕➖✖️➗ Arithmetic operations</p>
+            </div>
+            <div class="gradient-card template-card tictactoe">
+                <h4>⭕❌ Tic-Tac-Toe</h4>
+                <p>🎮 Game logic implementation</p>
+            </div>
+            <div class="gradient-card template-card todo">
+                <h4>📝 To-Do List</h4>
+                <p>🗓️ Organize daily tasks</p>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+
+<!-- Video Recorder Section -->
+<section class="project-section">
+    <div class="section-header">
+        <h2 class="section-title">🎥 Online Video Recorder</h2>
+        <p class="section-description">Browser-Based Screen Capture</p>
+    </div>
+    <div class="tech-stack">
+        <div class="tech-pill">Html</div>
+        <div class="tech-pill">Css</div>
+        <div class="tech-pill">Java Script</div>
+        <div class="tech-pill">JSZip/FileSaver.js</div>
+        <div class="tech-pill">Firebase</div>
+    </div>
+        <div class="feature-grid">
+            <!-- Screen Capture Card -->
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">🖥️🎬</div>
+                    <h3>Screen Capture</h3>
+                </div>
+                <ul class="feature-list">
+                    <li>🖼️ Full screen/window selection</li>
+                    <li>📐 Resolution customization</li>
+                    <li>🎞️ Frame rate control (up to 60fps)</li>
+                </ul>
+            </div>
+
+            <!-- Security Card -->
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">🔐</div>
+                    <h3>Security</h3>
+                </div>
+                <ul class="feature-list">
+                    <li>🔒 Encrypted recordings</li>
+                    <li>👤 User authentication</li>
+                    <li>🛡️ Permission management</li>
+                </ul>
+            </div>
+
+            <!-- Storage Card -->
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">💾</div>
+                    <h3>Storage</h3>
+                </div>
+                <ul class="feature-list">
+                    <li>📁 Local browser storage</li>
+                    <li>☁️ Cloud sync option</li>
+                    <li>📤 Export to MP4/WebM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="technical-specs">
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <h3>Advanced Features</h3>
+                </div>
+                <div class="spec-grid">
+                    <div class="bonus-item">
+                        <span class="bonus-badge">🔊</span>
+                        <div>
+                            <h4>Audio Mixing</h4>
+                            <p>🎤 System + microphone input</p>
+                        </div>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-badge">⚡</span>
+                        <div>
+                            <h4>Performance</h4>
+                            <p>🚀 60fps recording capability</p>
+                        </div>
+                    </div>
+                    <div class="bonus-item">
+                        <span class="bonus-badge">🏷️</span>
+                        <div>
+                            <h4>Management</h4>
+                            <p>📂 Video tagging & organization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+    <script src="script.js"></script>
+</body>
+</html>

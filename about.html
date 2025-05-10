@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imran.I - About</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    nav {
+      padding: 1.5rem 10%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #2d2e32;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #007bff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #007bff;
+    }
+        /* Base Styles */
+        .about-section {
+            padding: 6rem 10% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: 2.8rem;
+            color: #2d2e32;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #007bff;
+        }
+
+        /* About Content Layout */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+           
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        /* Profile Visual Element */
+        .profile-visual {
+            position: relative;
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .tech-stack-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            background: rgba(0,123,255,0.1);
+            color: #007bff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        /* Skills Section */
+        .skills-list {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        /* Innovation Grid */
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .innovation-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .innovation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Closing Statement */
+        .closing-statement {
+            background: rgba(0,123,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #007bff;
+            margin: 2rem 0;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 2rem auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <section class="about-section animate-on-scroll">
+        <h1 class="section-heading">About Me</h1>
+        
+        <div class="about-content">
+            <div class="profile-visual">
+                <div class="tech-stack-badges">
+                    <span class="tech-badge">HTML5/CSS3</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Python(basic)</span>
+                    <span class="tech-badge">prompt Enginearing</span>
+                </div>
+                
+                <div class="innovation-grid">
+                    <div class="innovation-card">
+                        <h3>🚀 Full-Stack Innovation</h3>
+                        <p>Bridging frontend development with prompt Enginearing</p>
+                    </div>
+                    <div class="innovation-card">
+                        <h3>🔮 Future Tech Adoption</h3>
+                        <p>Integrating emerging technologies such as Firebase and  AI</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-text-content">
+                <p class="about-text">
+                    As a 22-year-old driven and innovative 3rd-year Computer Science student, I specialize in crafting dynamic, 
+                    responsive web applications using modern web technologies. My core technical stack includes:
+                </p>
+
+                <ul class="skills-list">
+                    <li class="skill-item">
+                        <span class="highlight">Frontend Development:</span> 
+                        Html ,Css and Java Script
+                    </li>
+                    <li class="skill-item">
+                        <span class="highlight">Backend Development:</span> 
+                        JavaScript , python (basic) , Api itegration 
+                    </li>
+                    <li class="skill-item">
+                        <span class="highlight">AI Integration:</span> 
+                        Smart chatbots using ifesle Statement ,using (NLM)
+                    </li>
+                </ul>
+
+                <p class="about-text">
+                    My work extends beyond traditional development through strategic implementation of cutting-edge 
+                    AI-driven interactions. This unique combination allows me to create solutions that are:
+                </p>
+
+                <p class="closing-statement">
+                    Continuously exploring the intersection of computer science, web development, 
+                    I'm committed to pushing boundaries in digital creation while maintaining strong foundations 
+                    in core development principles.
+                </p>
+            </div>
+        </div>
+
+        <a href="projects.html" class="cta-button">
+            Explore My Work
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
