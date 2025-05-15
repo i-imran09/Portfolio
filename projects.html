@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Imran.I - Projects</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
-        /* Base Styles */
         :root {
             --primary: #007bff;
             --secondary: #0056b3;
@@ -25,21 +27,21 @@
             background: var(--background);
         }
 
-        /* Navigation */
         nav {
             padding: 1.5rem 10%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+            list-style: none;
             justify-content: flex-end;
         }
 
@@ -66,670 +68,1405 @@
             width: 100%;
         }
 
-        /* Project Sections */
-        .project-section {
-            padding: 8rem 10% 4rem;
-            scroll-margin-top: 6rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--text);
-            margin: 1rem 0;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        /* Project Cards */
-        .feature-grid {
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            padding: 6rem 5% 2rem;
+            grid-auto-rows: minmax(400px, auto);
         }
 
-        .gradient-card {
+        .project-card {
             background: white;
             border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-image-container {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.3s ease;
         }
 
-        .gradient-card:hover {
-            transform: translateY(-5px);
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            padding: 2rem;
+            margin: 2rem auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tech-pill {
+            background: rgba(0,123,255,0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            margin: 1rem auto 0;
+            align-self: center;
+            width: fit-content;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin: 2rem 0;
+        }
+
+        .gradient-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .card-icon {
-            font-size: 1.8rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            background: rgba(0,123,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Tech Stack */
-        .tech-stack {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .tech-pill {
-            background: rgba(0,123,255,0.1);
-            color: var(--primary);
-            padding: 0.6rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .tech-pill:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Demo Button */
-        .demo-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 3rem auto 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-btn::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.1);
-            left: -100%;
-            top: 0;
-            transition: left 0.4s ease;
-        }
-
-        .demo-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,123,255,0.3);
-        }
-
-        .demo-btn:hover::after {
-            left: 100%;
-        }
-
-        .demo-btn i {
-            font-size: 1.2rem;
-        }
-
-        /* Architecture Diagram */
-        .architecture-diagram {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 2rem 0;
-        }
-
-        .layer {
-            background: rgba(0,123,255,0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .layer:hover {
-            transform: translateX(10px);
-        }
-
-        /* Template Showcase */
-        .template-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .template-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .template-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .project-section {
-                padding: 6rem 5% 3rem;
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding-top: 5rem;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .project-image-container {
+                height: 250px;
             }
             
-            .nav-links {
-                justify-content: center;
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
             }
         }
-        /* ===== Expense Tracker Additions ===== */
-.feature-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .feature-card {
+    background: rgba(0,123,255,0.03);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0,123,255,0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,123,255,0.05);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(0,123,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
 }
 
 .feature-list {
-    list-style: none;
-    line-height: 2;
-    margin-left: 1rem;
+    padding-left: 0;
+    margin: 1rem 0 0;
 }
 
-.feature-list li::before {
-    content: "▹";
-    color: var(--primary);
-    margin-right: 0.8rem;
+.feature-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.special-features {
-    background: rgba(0,123,255,0.05);
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 2rem 0;
+.feature-list li:last-child {
+    border-bottom: none;
 }
 
-.admin-portal {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.portal-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
+/* Portal Cards */
 .portal-card {
-    background: var(--background);
+    background: white;
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,123,255,0.1);
 }
 
 .portal-card:hover {
     transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0,123,255,0.1);
 }
 
 .portal-icon {
-    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.bonus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+/* Bonus Items */
+.bonus-item {
+    background: rgba(0,123,255,0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin: 0.5rem;
+    border: 1px solid rgba(0,123,255,0.1);
 }
 
-.bonus-item {
-    background: white;
-    padding: 1rem;
-    border-radius: 10px;
+.bonus-badge {
+    width: 40px;
+    height: 40px;
+    background: rgba(0,123,255,0.1);
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    transition: transform 0.3s ease;
+    justify-content: center;
 }
 
-.bonus-item:hover {
-    transform: translateX(5px);
+/* Grid Alignment */
+.feature-grid {
+    gap: 1.5rem;
+    align-items: start;
 }
 
-/* ===== Web App Builder Additions ===== */
-.project-overview {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 2rem 0;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.project-overview ul {
-    padding-left: 2rem;
-    margin: 1rem 0;
-    list-style-type: circle;
-}
-
-.tab-system {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 2rem 0;
-}
-
-.feature-item {
-    background: var(--background);
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 1rem 0;
-    transition: transform 0.3s ease;
-}
-
-.feature-item:hover {
-    transform: translateY(-3px);
-}
-
-.component-card {
+.feature-column {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 2rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 2rem 0;
-}
-
-.component-visual {
-    background: var(--background);
-    border-radius: 12px;
-    min-height: 200px;
-}
-
-/* ===== Video Recorder Additions ===== */
-.tech-badge {
-    background: rgba(0,123,255,0.1);
-    color: var(--primary);
-    padding: 0.5rem 1.2rem;
-    border-radius: 25px;
-    margin: 0 0.5rem 0.5rem 0;
-    display: inline-block;
-}
-
-.spec-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
 }
 
-.spec-item {
-    background: var(--background);
-    padding: 1.5rem;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
+.portal-features {
+    gap: 1.5rem;
+    margin-top: 1rem;
 }
 
-.spec-item:hover {
-    transform: translateY(-3px);
-}
-
-/* ===== Responsive Adjustments ===== */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .component-card {
-        grid-template-columns: 1fr;
+    .feature-column {
+        gap: 1rem;
     }
     
-    .portal-features {
-        grid-template-columns: 1fr;
-    }
-    
-    .special-features {
+    .feature-card {
         padding: 1rem;
     }
+    
+    .portal-card {
+        padding: 1.2rem;
+    }
+}
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1200px;
+    max-height: 80vh;
+    object-fit: contain;
+    animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-lightbox:hover {
+    color: var(--primary);
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    transition: 0.3s;
+    user-select: none;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.next { right: 0; }
+.prev { left: 0; }
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,123,255,0.8);
+}
+
+.project-image-container {
+    cursor: zoom-in;
+}
+/* Image Carousel */
+.image-carousel {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.main-image-container {
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumbnail.active {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1200px;
+    max-height: 80vh;
+    object-fit: contain;
+}
+@media (max-width: 768px) {
+    .project-card {
+        margin: 0 10px; /* Add horizontal spacing */
+        padding: 15px;
+    }
+
+    .main-image-container {
+        height: auto !important; /* Remove fixed height */
+        aspect-ratio: 16/9; /* Maintain aspect ratio */
+    }
+
+    .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensure image covers container */
+        border-radius: 8px;
+    }
+
+    .thumbnail-gallery {
+        padding-bottom: 10px; /* Space for scroll */
+        -webkit-overflow-scrolling: touch; /* Smooth scroll */
+    }
+
+    .thumbnail {
+        width: 45px !important;
+        height: 45px !important;
+        flex-shrink: 0; /* Prevent thumbnail shrinking */
+    }
+
+    /* Better mobile touch targets */
+    .demo-btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        margin-top: 10px;
+    }
+
+    .project-card h3 {
+        font-size: 1.2rem;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-grid {
+        padding: 4rem 3% 1rem;
+    }
+
+    .main-image-container {
+        aspect-ratio: 1/1; /* Square ratio for smallest screens */
+    }
+
+    .thumbnail {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    /* Improved text hierarchy */
+    .project-card h3 {
+        font-size: 1.1rem;
+        line-height: 1.4;
+    }
+
+    .demo-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Add this for better image scaling */
+.image-carousel {
+    overflow: hidden;
+    border-radius: 12px;
+    position: relative;
+}
+
+.project-image {
+    transition: transform 0.3s ease;
+    will-change: transform; /* Optimize animation */
 }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-        </div>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
     </nav>
 
-    <!-- Expense Tracker Section -->
-    <section class="project-section">
-        <div class="section-header">
-            <h2 class="section-title">Expense Tracker</h2>
-            <p class="section-description">Expense tracking and Management System</p>
+    <div class="projects-grid">
+        <!-- Expense Tracker Card -->
+        <div class="project-card">
+            <div class="image-carousel">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="expense-4.png" class="project-image active" 
+                         onclick="openLightbox('expense', 0)">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <img src="expense-1.png" class="thumbnail active" 
+                         onclick="changeMainImage('expense', 0)">
+                    <img src="expense-2.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 1)">
+                    <img src="expense-3.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 2)">
+                    <img src="expense-4.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 3)">
+                    <img src="expense-5.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 4)">
+                    <img src="expense-6.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 5)">
+                    <img src="expense-8.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 6)">
+                    <img src="expense-9.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 8)">
+                    <img src="expense-10.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 9)">
+                    <img src="expense-11.png" class="thumbnail" 
+                         onclick="changeMainImage('expense', 10)">
+                </div>
+            </div>
+            <h3>Expense Tracker</h3>
+            <button class="demo-btn" onclick="showModal('expense')">
+                <i class="fas fa-info-circle"></i> View Details
+            </button>
         </div>
 
+        <!-- Web Builder -->
+        <div class="project-card">
+            <div class="image-carousel">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="app-3.png" class="project-image active" 
+                         onclick="openLightbox('web', 0)">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <img src="app-1.png" class="thumbnail active" 
+                         onclick="changeMainImage('web', 0)">
+                    <img src="app-2.png" class="thumbnail" 
+                         onclick="changeMainImage('web', 1)">
+                    <img src="app-3.png" class="thumbnail" 
+                         onclick="changeMainImage('web', 2)">
+                    <img src="app-4.png" class="thumbnail" 
+                         onclick="changeMainImage('web', 3)">
+                    <img src="app-5.png" class="thumbnail" 
+                         onclick="changeMainImage('web', 3)">
+                </div>
+            </div>
+            <h3>Web App Builder</h3>
+            <button class="demo-btn" onclick="showModal('web')">
+                <i class="fas fa-info-circle"></i> View Details
+            </button>
+        </div>
+
+        <div class="project-card">
+            <div class="image-carousel">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="video-2.png" class="project-image active" 
+                         onclick="openLightbox('video', 0)">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <img src="video-1.png" class="thumbnail active" 
+                         onclick="changeMainImage('video', 0)">
+                    <img src="video-2.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 1)">
+                    <img src="video-3.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 2)">
+                    <img src="video-4.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 3)">
+                    <img src="video-5.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 4)">
+                    <img src="video-6.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 5)">
+                    <img src="video-7.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 6)">
+                    <img src="video-8.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 7)">
+                    <img src="video-9.png" class="thumbnail" 
+                         onclick="changeMainImage('video', 8)">
+                </div>
+            </div>
+            <h3>Video Recorder</h3>
+            <button class="demo-btn" onclick="showModal('video')">
+                <i class="fas fa-info-circle"></i> View Details
+            </button>
+        </div>
+        <!-- Attendance System -->
+        <div class="project-card">
+            <div class="image-carousel">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="attendance-2.png" class="project-image active" 
+                         onclick="openLightbox('attendance', 0)">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <img src="attendance-1.png" class="thumbnail active" 
+                         onclick="changeMainImage('attendance', 0)">
+                    <img src="attendance-2.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 1)">
+                    <img src="attendance-3.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 2)">
+                    <img src="attendance-4.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 3)">
+                    <img src="attendance-5.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 4)">
+                    <img src="attendance-6.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 4)">
+                    <img src="attendance-7.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 4)">
+                    <img src="attendance-8.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 4)">
+                    <img src="attendance-9.png" class="thumbnail" 
+                         onclick="changeMainImage('attendance', 4)">
+                </div>
+            </div>
+            <h3>Attendance Management</h3>
+            <button class="demo-btn" onclick="showModal('attendance')">
+                <i class="fas fa-info-circle"></i> View Details
+            </button>
+        </div>
+
+        <div class="project-card">
+            <div class="image-carousel">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="hospital-0.png" class="project-image active" 
+                         onclick="openLightbox('hospital', 0)">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    <img src="hospital-1.png" class="thumbnail active" 
+                         onclick="changeMainImage('hospital', 0)">
+                    <img src="hospital-2.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 1)">
+                    <img src="hospital-3.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 2)">
+                    <img src="hospital-4.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 3)">
+                    <img src="hospital-5.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 4)">
+                    <img src="hospital-6.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 5)">
+                    <img src="hospital-7.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 6)">
+                    <img src="hospital-8.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 7)">
+                    <img src="hospital-9.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 8)">
+                    <img src="hospital-10.png" class="thumbnail" 
+                         onclick="changeMainImage('hospital', 9)">
+                </div>
+            </div>
+            <h3>Hospital Management</h3>
+            <button class="demo-btn" onclick="showModal('hospital')">
+                <i class="fas fa-info-circle"></i> View Details
+            </button>
+        </div>
+    <!-- Expense Tracker Modal -->
+    <div id="expenseModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Expense Tracker</h2>
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+        <ul>
+            <li>The expense tracker is designed to track expenses in a systematic way instead of manual tracking.</li>
+            <li> It allows you to check daily, monthly, and yearly data with bar chart references.</li>
+            <li> A built-in chatbot helps users retrieve specific details for a given date, month, or year, along with features like viewing remaining balance, changing names, editing salary, etc.</li>
+            <li>A to-do list is included to note daily tasks and monitor their status as done or not done.</li>
+            <li> For security, Firebase is used to store user details securely, including email OTP verification.</li>
+            </ul>
         <div class="tech-stack">
-            <div class="tech-pill">Html</div>
-            <div class="tech-pill">Css</div>
-            <div class="tech-pill">Java Script</div>
-            <div class="tech-pill">Chart.js</div>
-            <div class="tech-pill">Firebase</div>
-            <div class="tech-pill">Chart.js</div>
-            <div class="tech-pill">Api </div>
+            <span class="tech-pill">
+                <i class="fab fa-html5"></i>
+                HTML5
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-css3-alt"></i>
+                CSS3
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-js-square"></i>
+                JavaScript
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-fire"></i>
+                Firebase
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-chart-bar"></i>
+                Chart.js
+            </span>
+        </div>
+        <div class="feature-grid">
+          <!-- Core Features Column -->
+          <div class="feature-column">
+            <div class="feature-card">
+              <div class="card-header">
+                <div class="card-icon">💰</div>
+                <h3>Core Financial Features</h3>
+              </div>
+              <ul class="feature-list">
+                <li>📂 Multi-category expense tracking</li>
+                <li>💰 Salary monitoring & balance calculations</li>
+                <li>📊 Interactive financial dashboards</li>
+                <li>✅ Integrated To-Do system</li>
+              </ul>
+            </div>
 
+            <div class="feature-card">
+              <div class="card-header">
+                <div class="card-icon">🛡️</div>
+                <h3>Security Architecture</h3>
+              </div>
+              <ul class="feature-list">
+                <li>Firebase Authentication</li>
+                <li>Role-based access control</li>
+                <li>End-to-end data encryption</li>
+                <li>OTP verification system</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Advanced Features Column -->
+          <div class="feature-column">
+            <div class="feature-card">
+              <div class="card-header">
+                <div class="card-icon">🤖</div>
+                <h3>Smart Assistant</h3>
+              </div>
+              <ul class="feature-list">
+                <li>Natural language queries</li>
+                <li>Quick-edit commands</li>
+              </ul>
+            </div>
+
+            <div class="feature-card">
+              <div class="card-header">
+                <div class="card-icon">📱</div>
+                <h3>Mobile-First Experience</h3>
+              </div>
+              <ul class="feature-list">
+                <li>Responsive bottom navigation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin & Bonus Features -->
+        <div class="special-features">
+          <div class="admin-portal">
+            <h3 class="portal-title">Admin Portal</h3>
+            <div class="portal-features">
+              <div class="portal-card">
+                <div class="portal-icon">👥</div>
+                <h4>User Management</h4>
+                <p>Adding User<br />Activity monitoring</p>
+              </div>
+              <div class="portal-card">
+                <div class="portal-icon">📊</div>
+                <h4>Financial Oversight</h4>
+                <p>Organization-wide analytics<br />Export-ready reports</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bonus-features">
+            <h3>Premium Enhancements</h3>
+            <div class="bonus-grid">
+              <div class="bonus-item">
+                <span class="bonus-badge">🎨</span>
+                <span>Animated Splash Screens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://i-imran09.github.io/Expense-Tracker/" class="demo-btn">
+          <i class="fas fa-rocket"></i>
+          Live Demo
+        </a>
+      </div>
+    </div>
+    <!-- Web Builder Modal -->
+    <div id="webModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Web App Builder</h2>
+          <span class="close-modal" onclick="closeModal()">&times;</span>
         </div>
         
-                <div class="feature-grid">
-                    <!-- Core Features Column -->
-                    <div class="feature-column">
-                        <div class="feature-card gradient-card">
-                            <div class="card-header">
-                                <div class="card-icon">💰</div>
-                                <h3>Core Financial Features</h3>
-                            </div>
-                            <ul class="feature-list">
-                                <li>📂 Multi-category expense tracking</li>
-                                <li>💰 Salary monitoring & balance calculations</li>
-                                <li>📊 Interactive financial dashboards</li>
-                                <li>✅ Integrated To-Do system</li>
-                            </ul>
-                        </div>
-        
-                        <div class="feature-card gradient-card">
-                            <div class="card-header">
-                                <div class="card-icon">🛡️</div>
-                                <h3>Security Architecture</h3>
-                            </div>
-                            <ul class="feature-list">
-                                <li>Firebase Authentication</li>
-                                <li>Role-based access control</li>
-                                <li>End-to-end data encryption</li>
-                                <li>OTP verification system</li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <!-- Advanced Features Column -->
-                    <div class="feature-column">
-                        <div class="feature-card gradient-card">
-                            <div class="card-header">
-                                <div class="card-icon">🤖</div>
-                                <h3> Smart Assistant</h3>
-                            </div>
-                            <ul class="feature-list">
-                                <li>Natural language queries</li>
-                                <li>Quick-edit commands</li>
-                            </ul>
-                        </div>
-        
-                        <div class="feature-card gradient-card">
-                            <div class="card-header">
-                                <div class="card-icon">📱</div>
-                                <h3>Mobile-First Experience</h3>
-                            </div>
-                            <ul class="feature-list">
-                                <li>Responsive bottom navigation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Admin & Bonus Features -->
-            <div class="special-features">
-                <div class="admin-portal">
-                    <h3 class="portal-title">Admin Portal</h3>
-                    <div class="portal-features">
-                        <div class="portal-card">
-                            <div class="portal-icon">👥</div>
-                            <h4>User Management</h4>
-                            <p>Adding User<br>Activity monitoring</p>
-                        </div>
-                        <div class="portal-card">
-                            <div class="portal-icon">📊</div>
-                            <h4>Financial Oversight</h4>
-                            <p>Organization-wide analytics<br>Export-ready reports</p>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="bonus-features">
-                    <h3>Premium Enhancements</h3>
-                    <div class="bonus-grid">
-                        <div class="bonus-item">
-                            <span class="bonus-badge">🎨</span>
-                            <span>Animated Splash Screens</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="https://i-imran09.github.io/Expense-Tracker/" class="demo-btn">
-                <i class="fas fa-rocket"></i>
-                Live Demo
-            </a>
-        </section>
-        <hr>
+       <ul> 
+        <li>The Application Builder is specially created for those who are learning to code.</li>
+<li>It provides basic app templates along with their source code so that users can make changes and learn by doing.</li>
+<li>There are 10 pre-built templates:
+Calculator App, Tic-Tac-Toe, Resume Builder, Portfolio Website, Note Taking App, Business Website,
+To-Do List, Stopwatch & Timer, Drawing App, Quiz App (Tamil)</li>
+<li>Users can download and use the apps locally.</li>
+<li>For secure login, Firebase with email authentication is used.</li>
+</ul>
+        <div class="tech-stack">
+            <span class="tech-pill">
+                <i class="fab fa-html5"></i>
+                HTML5
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-css3-alt"></i>
+                CSS3
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-js-square"></i>
+                JavaScript
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-fire"></i>
+                Firebase
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-file-archive"></i>
+                JSZip
+            </span>
+        </div>
 
-<!-- Web Application Builder Section -->
-<section class="project-section">
-    <div class="section-header">
-        <h2 class="section-title">🌐 Web Application Builder</h2>
-        <p class="section-description">No-Code Development Platform</p>
-    </div>
-
-    <div class="tech-stack">
-        <div class="tech-pill">HTML5</div>
-        <div class="tech-pill">CSS3</div>
-        <div class="tech-pill">JavaScript</div>
-        <div class="tech-pill">JSZip/FileSaver.js</div>
-        <div class="tech-pill">Firebase</div>
-    </div>
-
-    <div class="gradient-card project-overview">
-        <div class="card-header">
+        <div class="gradient-card project-overview">
+          <div class="card-header">
             <div class="card-icon">🌍</div>
             <h3>Project Overview</h3>
-        </div>
-        <p>A powerful no-code platform that enables users to:</p>
-        <ul class="feature-list">
+          </div>
+          <p>A powerful no-code platform that enables users to:</p>
+          <ul class="feature-list">
             <li>🔐 Authenticate with Firebase</li>
             <li>🚀 Generate apps from templates</li>
             <li>👀 Real-time preview & editing</li>
             <li>📥 Instant ZIP downloads</li>
             <li>✏️ Split-view code editor</li>
-        </ul>
-    </div>
-
-    <div class="technical-deep-dive">
-        <div class="gradient-card tab-system">
-            <div class="feature-category active">
-                <div class="card-header">
-                    <div class="card-icon">✨</div>
-                    <h3>Key Features</h3>
-                </div>
-                <div class="feature-grid">
-                    <div class="gradient-card feature-item">
-                        <div class="card-header">
-                            <div class="card-icon">📁</div>
-                            <h4>10+ App Templates</h4>
-                        </div>
-                        <p>Pre-built apps like Calculator, Portfolio, To-Do List and more</p>
-                    </div>
-                    <div class="gradient-card feature-item">
-                        <div class="card-header">
-                            <div class="card-icon">👀</div>
-                            <h4>Live Preview</h4>
-                        </div>
-                        <p>Instant app rendering with real-time updates</p>
-                    </div>
-                    <div class="gradient-card feature-item">
-                        <div class="card-header">
-                            <div class="card-icon">📤</div>
-                            <h4>Export as ZIP</h4>
-                        </div>
-                        <p>Download your customized app files instantly</p>
-                    </div>
-                    <div class="gradient-card feature-item">
-                        <div class="card-header">
-                            <div class="card-icon">✏️</div>
-                            <h4>Live Pan Editor</h4>
-                        </div>
-                        <p>Customize template designs easily</p>
-                    </div>
-                    <div class="gradient-card feature-item">
-                        <div class="card-header">
-                            <div class="card-icon">📱</div>
-                            <h4>Responsive UI</h4>
-                        </div>
-                        <p>Optimized for all screen sizes with smooth transitions</p>
-                    </div>
-                </div>
-            </div>
+          </ul>
         </div>
-    </div>
 
-    <div class="gradient-card template-showcase">
-        <div class="card-header">
+        <div class="technical-deep-dive">
+          <div class="gradient-card tab-system">
+            <div class="feature-category active">
+              <div class="card-header">
+                <div class="card-icon">✨</div>
+                <h3>Key Features</h3>
+              </div>
+              <div class="feature-grid">
+                <div class="gradient-card feature-item">
+                  <div class="card-header">
+                    <div class="card-icon">📁</div>
+                    <h4>10+ App Templates</h4>
+                  </div>
+                  <p>
+                    Pre-built apps like Calculator, Portfolio, To-Do List and
+                    more
+                  </p>
+                </div>
+                <div class="gradient-card feature-item">
+                  <div class="card-header">
+                    <div class="card-icon">👀</div>
+                    <h4>Live Preview</h4>
+                  </div>
+                  <p>Instant app rendering with real-time updates</p>
+                </div>
+                <div class="gradient-card feature-item">
+                  <div class="card-header">
+                    <div class="card-icon">📤</div>
+                    <h4>Export as ZIP</h4>
+                  </div>
+                  <p>Download your customized app files instantly</p>
+                </div>
+                <div class="gradient-card feature-item">
+                  <div class="card-header">
+                    <div class="card-icon">✏️</div>
+                    <h4>Live Pan Editor</h4>
+                  </div>
+                  <p>Customize template designs easily</p>
+                </div>
+                <div class="gradient-card feature-item">
+                  <div class="card-header">
+                    <div class="card-icon">📱</div>
+                    <h4>Responsive UI</h4>
+                  </div>
+                  <p>Optimized for all screen sizes with smooth transitions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gradient-card template-showcase">
+          <div class="card-header">
             <div class="card-icon">🎨</div>
             <h3>Template Gallery</h3>
-        </div>
-        <div class="template-grid">
+          </div>
+          <div class="template-grid">
             <div class="gradient-card template-card calculator">
-                <h4>🧮 Calculator</h4>
-                <p>➕➖✖️➗ Arithmetic operations</p>
+              <h4>🧮 Calculator</h4>
+              <p>➕➖✖️➗ Arithmetic operations</p>
             </div>
             <div class="gradient-card template-card tictactoe">
-                <h4>⭕❌ Tic-Tac-Toe</h4>
-                <p>🎮 Game logic implementation</p>
+              <h4>⭕❌ Tic-Tac-Toe</h4>
+              <p>🎮 Game logic implementation</p>
             </div>
             <div class="gradient-card template-card todo">
-                <h4>📝 To-Do List</h4>
-                <p>🗓️ Organize daily tasks</p>
+              <h4>📝 To-Do List</h4>
+              <p>🗓️ Organize daily tasks</p>
             </div>
+          </div>
         </div>
-    </div>
-</section>
-<hr>
 
-<!-- Video Recorder Section -->
-<section class="project-section">
-    <div class="section-header">
-        <h2 class="section-title">🎥 Online Video Recorder</h2>
-        <p class="section-description">Browser-Based Screen Capture</p>
+        <a
+          href="https://github.com/i-imran09/Application_Builder"
+          class="demo-btn"
+        >
+          <i class="fas fa-rocket"></i>
+          View Code
+        </a>
+      </div>
     </div>
-    <div class="tech-stack">
-        <div class="tech-pill">Html</div>
-        <div class="tech-pill">Css</div>
-        <div class="tech-pill">Java Script</div>
-        <div class="tech-pill">JSZip/FileSaver.js</div>
-        <div class="tech-pill">Firebase</div>
-    </div>
+    <!-- Video Recorder Modal -->
+    <div id="videoModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Video Recorder</h2>
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="tech-stack">
+            <span class="tech-pill">
+                <i class="fab fa-html5"></i>
+                HTML5
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-css3-alt"></i>
+                CSS3
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-js-square"></i>
+                JavaScript
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-video"></i>
+                MediaRecorder API
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-broadcast-tower"></i>
+                WebRTC
+            </span>
+        </div>
+
         <div class="feature-grid">
-            <!-- Screen Capture Card -->
-            <div class="gradient-card">
-                <div class="card-header">
-                    <div class="card-icon">🖥️🎬</div>
-                    <h3>Screen Capture</h3>
-                </div>
-                <ul class="feature-list">
-                    <li>🖼️ Full screen/window selection</li>
-                    <li>📐 Resolution customization</li>
-                    <li>🎞️ Frame rate control (up to 60fps)</li>
-                </ul>
+          <!-- Screen Capture Card -->
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">🖥️🎬</div>
+              <h3>Screen Capture</h3>
             </div>
+            <ul class="feature-list">
+              <li>🖼️ Full screen/window selection</li>
+              <li>📐 Resolution customization</li>
+              <li>🎞️ Frame rate control (up to 60fps)</li>
+            </ul>
+          </div>
 
-            <!-- Security Card -->
-            <div class="gradient-card">
-                <div class="card-header">
-                    <div class="card-icon">🔐</div>
-                    <h3>Security</h3>
-                </div>
-                <ul class="feature-list">
-                    <li>🔒 Encrypted recordings</li>
-                    <li>👤 User authentication</li>
-                    <li>🛡️ Permission management</li>
-                </ul>
+          <!-- Security Card -->
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">🔐</div>
+              <h3>Security</h3>
             </div>
+            <ul class="feature-list">
+              <li>🔒 Encrypted recordings</li>
+              <li>👤 User authentication</li>
+              <li>🛡️ Permission management</li>
+            </ul>
+          </div>
 
-            <!-- Storage Card -->
-            <div class="gradient-card">
-                <div class="card-header">
-                    <div class="card-icon">💾</div>
-                    <h3>Storage</h3>
-                </div>
-                <ul class="feature-list">
-                    <li>📁 Local browser storage</li>
-                    <li>☁️ Cloud sync option</li>
-                    <li>📤 Export to MP4/WebM</li>
-                </ul>
+          <!-- Storage Card -->
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">💾</div>
+              <h3>Storage</h3>
             </div>
+            <ul class="feature-list">
+              <li>📁 Local browser storage</li>
+              <li>☁️ Cloud sync option</li>
+              <li>📤 Export to MP4/WebM</li>
+            </ul>
+          </div>
         </div>
 
         <div class="technical-specs">
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">🚀</div>
+              <h3>Advanced Features</h3>
+            </div>
+            <div class="spec-grid">
+              <div class="bonus-item">
+                <span class="bonus-badge">🔊</span>
+                <div>
+                  <h4>Audio Mixing</h4>
+                  <p>🎤 System + microphone input</p>
+                </div>
+              </div>
+              <div class="bonus-item">
+                <span class="bonus-badge">⚡</span>
+                <div>
+                  <h4>Performance</h4>
+                  <p>🚀 60fps recording capability</p>
+                </div>
+              </div>
+              <div class="bonus-item">
+                <span class="bonus-badge">🏷️</span>
+                <div>
+                  <h4>Management</h4>
+                  <p>📂 Video tagging & organization</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://github.com/i-imran09/video-recorder" class="demo-btn">
+          <i class="fas fa-rocket"></i>
+          View Code
+        </a>
+      </div>
+    </div>
+    <!-- Add this modal at the bottom -->
+    <div id="attendanceModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Attendance Management System</h2>
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="tech-stack">
+            <span class="tech-pill">
+                <i class="fab fa-html5"></i>
+                HTML5
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-css3-alt"></i>
+                CSS3
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-js-square"></i>
+                JavaScript
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-fire"></i>
+                Firebase
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-database"></i>
+                Firestore
+            </span>
+        </div>
+
+        <div class="feature-grid">
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">👥</div>
+              <h3>Role-Based Access</h3>
+            </div>
+            <ul class="feature-list">
+              <li>🔒 Admin portal (Manage teachers/attendance)</li>
+              <li>👩🏫 Teacher dashboard (Student management)</li>
+              <li>📱 Mobile-friendly interface</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">📈</div>
+              <h3>Analytics & Reporting</h3>
+            </div>
+            <ul class="feature-list">
+              <li>📅 Daily/monthly attendance reports</li>
+              <li>📊 Present percentage analytics</li>
+            </ul>
+          </div>
+
+          <div class="gradient-card">
+            <div class="card-header">
+              <div class="card-icon">👨🎓</div>
+              <h3>Student Management</h3>
+            </div>
+            <ul class="feature-list">
+              <li>➕➖ CRUD operations</li>
+              <li>🩸 Blood group tracking</li>
+              <li>📞 Parent contact storage</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="admin-portal">
+          <h3 class="portal-title">Admin Features</h3>
+          <div class="portal-features">
+            <div class="portal-card">
+              <div class="portal-icon">📊</div>
+              <h4>System Analytics</h4>
+              <p>Real-time attendance overview<br />Section-wise tracking</p>
+            </div>
+            <div class="portal-card">
+              <div class="portal-icon">👩🏫</div>
+              <h4>Staff Management</h4>
+              <p>Teacher assignments<br />Access controls</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gradient-card impact-section">
+          <div class="card-header">
+            <div class="card-icon">🚀</div>
+            <h3>System Impact</h3>
+          </div>
+          <div class="spec-grid">
+            <div class="bonus-item">
+              <span class="bonus-badge">⏱️</span>
+              <div>
+                <h4>70% Faster Tracking</h4>
+                <p>Reduced manual processes</p>
+              </div>
+            </div>
+            <div class="bonus-item">
+              <span class="bonus-badge">🔐</span>
+              <div>
+                <h4>Secure Access</h4>
+                <p>Role-based permissions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://github.com/i-imran09/Attendance-" class="demo-btn">
+          <i class="fas fa-rocket"></i>
+          View code
+        </a>
+      </div>
+    </div>
+    <!-- Add modal -->
+<div id="hospitalModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Hospital Management System</h2>
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="tech-stack">
+            <span class="tech-pill">
+                <i class="fab fa-html5"></i>
+                HTML5
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-css3-alt"></i>
+                CSS3
+            </span>
+            <span class="tech-pill">
+                <i class="fab fa-js-square"></i>
+                JavaScript
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-fire"></i>
+                Firebase
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-database"></i>
+                Firestore
+            </span>
+            <span class="tech-pill">
+                <i class="fas fa-envelope"></i>
+                EmailJS
+            </span>
+        </div>
+
+        <div class="feature-grid">
             <div class="gradient-card">
                 <div class="card-header">
-                    <div class="card-icon">🚀</div>
-                    <h3>Advanced Features</h3>
+                    <div class="card-icon">👥</div>
+                    <h3>Role-Based Access</h3>
                 </div>
-                <div class="spec-grid">
-                    <div class="bonus-item">
-                        <span class="bonus-badge">🔊</span>
-                        <div>
-                            <h4>Audio Mixing</h4>
-                            <p>🎤 System + microphone input</p>
-                        </div>
+                <ul class="feature-list">
+                    <li>👨⚕️ Doctor portals</li>
+                    <li>👨💻 Admin dashboard</li>
+                    <li>👨⚕️ Patient profiles</li>
+                </ul>
+            </div>
+
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">📅</div>
+                    <h3>Appointment System</h3>
+                </div>
+                <ul class="feature-list">
+                    <li>⏱️ Real-time scheduling</li>
+                    <li>📆 Calendar integration</li>
+                </ul>
+            </div>
+
+            <div class="gradient-card">
+                <div class="card-header">
+                    <div class="card-icon">🏥</div>
+                    <h3>Medical Records</h3>
+                </div>
+                <ul class="feature-list">
+                    <li>Coming</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-portal">
+            <h3 class="portal-title">Workflow Automation</h3>
+            <div class="portal-features">
+                <div class="portal-card">
+                    <div class="portal-icon">📧</div>
+                    <h4>Email Notifications</h4>
+                    <p>Appointment confirmations<br>Status updates</p>
+                </div>
+                <div class="portal-card">
+                    <div class="portal-icon">📊</div>
+                    <h4>Analytics Dashboard</h4>
+                    <p>Patient flow statistics<br>Resource utilization</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gradient-card impact-section">
+            <div class="card-header">
+                <div class="card-icon">🚀</div>
+                <h3>System Impact</h3>
+            </div>
+            <div class="spec-grid">
+                <div class="bonus-item">
+                    <span class="bonus-badge">⏱️</span>
+                    <div>
+                        <h4>40% Faster Bookings</h4>
+                        <p>Patient self-scheduling</p>
                     </div>
-                    <div class="bonus-item">
-                        <span class="bonus-badge">⚡</span>
-                        <div>
-                            <h4>Performance</h4>
-                            <p>🚀 60fps recording capability</p>
-                        </div>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-badge">🔐</span>
+                    <div>
+                        <h4>Secure Data</h4>
+                        <p>HIPAA-compliant access</p>
                     </div>
-                    <div class="bonus-item">
-                        <span class="bonus-badge">🏷️</span>
-                        <div>
-                            <h4>Management</h4>
-                            <p>📂 Video tagging & organization</p>
-                        </div>
+                </div>
+                <div class="bonus-item">
+                    <span class="bonus-badge">📈</span>
+                    <div>
+                        <h4>Real-time Updates</h4>
+                        <p>Instant status changes</p>
                     </div>
                 </div>
             </div>
         </div>
-</section>
 
+        <a href="https://github.com/i-imran09/Hospital-Management" class="demo-btn">
+            <i class="fas fa-rocket"></i>
+            Live Demo
+        </a>
+    </div>
+</div>
+<div id="imageLightbox" class="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="expandedImg">
+    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+    <a class="next" onclick="changeImage(1)">&#10095;</a>
+</div>
     <script src="script.js"></script>
-</body>
+  </body>
+  <script>
+        function showModal(project) {
+            const modal = document.getElementById(`${project}Modal`);
+            if(modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Close when clicking outside modal
+        window.onclick = function(event) {
+            if(event.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        }
+
+        // Close with ESC key
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') closeModal();
+        });
+// Project images configuration
+const projectImages = {
+    'expense': [
+        'expense-1.png',
+        'expense-2.png',
+        'expense-3.png',
+        'expense-4.png',
+        'expense-5.png',
+        'expense-6.png',
+        'expense-8.png',
+        'expense-9.png',
+        'expense-10.png',
+        'expense-11.png'
+    ],
+    'web': [
+        'app-1.png',
+        'app-2.png',
+        'app-3.png',
+        'app-4.png',
+        'app-5.png'
+    ],
+    'video': [
+        'video-1.png',
+        'video-2.png',
+        'video-3.png',
+        'video-4.png',
+        'video-5.png',
+        'video-6.png',
+        'video-7.png'
+    ],
+    'attendance': [
+        'attendance-1.png',
+        'attendance-2.png',
+        'attendance-3.png',
+        'attendance-4.png',
+        'attendance-5.png',
+        'attendance-6.png',
+        'attendance-7.png',
+        'attendance-8.png',
+        'attendance-9.png'
+    ],
+    'hospital': [
+        'hospital-1.png',
+        'hospital-2.png',
+        'hospital-3.png',
+        'hospital-4.png',
+        'hospital-5.png',
+        'hospital-6.png',
+        'hospital-7.png',
+        'hospital-8.png',
+        'hospital-9.png',
+        'hospital-10.png'
+    ]
+    // Add other projects...
+};
+
+// Change main image in card
+function changeMainImage(projectId, index) {
+    const card = event.target.closest('.project-card');
+    
+    // Update thumbnails
+    card.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+    
+    // Update main image
+    const mainImg = card.querySelector('.project-image');
+    mainImg.src = projectImages[projectId][index];
+}
+
+// Lightbox functions
+function openLightbox(projectId, index) {
+    const lightbox = document.getElementById('imageLightbox');
+    lightbox.dataset.project = projectId;
+    lightbox.dataset.index = index;
+    document.getElementById('expandedImg').src = projectImages[projectId][index];
+    lightbox.style.display = "block";
+}
+
+function closeLightbox() {
+    document.getElementById('imageLightbox').style.display = "none";
+}
+
+function changeImage(n) {
+    const lightbox = document.getElementById('imageLightbox');
+    const projectId = lightbox.dataset.project;
+    const currentIndex = parseInt(lightbox.dataset.index);
+    const newIndex = (currentIndex + n + projectImages[projectId].length) % projectImages[projectId].length;
+    
+    lightbox.dataset.index = newIndex;
+    document.getElementById('expandedImg').src = projectImages[projectId][newIndex];
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if(document.getElementById('imageLightbox').style.display === 'block') {
+        if(e.key === 'Escape') closeLightbox();
+        if(e.key === 'ArrowLeft') changeImage(-1);
+        if(e.key === 'ArrowRight') changeImage(1);
+    }
+});
+  </script>
 </html>
