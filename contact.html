@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/X-icon" href="images/portfolio.png">
+    <title>Imran.I - Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #007bff;
+            --secondary: #0056b3;
+            --text: #2d2e32;
+            --background: #f8f9fa;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        nav {
+        padding: 1.5rem 10%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        justify-content: flex-center;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .nav-link {
+        color: var(--text);
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        text-decoration: none;
+        padding: 0.5rem 0;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: var(--primary);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .nav-link:hover {
+        color: var(--primary);
+    }
+        /* Contact Container */
+        .container {
+            padding: 6rem 5% 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .info-card i {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover { color: var(--primary); }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-top: 0.3rem;
+        }
+
+        button[type="submit"] {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .container { padding: 7rem 5% 3rem; }
+            button[type="submit"] { width: auto; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="contact-section">
+            <h1 class="section-heading">Get in Touch</h1>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Location</h3>
+                        <p>Arakkonam, Tamilnadu, India</p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <a href="mailto:iimraniimran4@gmail.com" target="_blank"> iimraniimran4@gmail.com</a>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone</h3>
+                        <p>+91 7397677968</p>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/i-imran09" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/i-imran09/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <form action="https://formspree.io/f/xwpvgezy" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label>Your Name:</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Email:</label>
+                        <input type="email" name="_replyto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea name="message" rows="4" required></textarea>
+                    </div>
+                    
+                    <button type="submit">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

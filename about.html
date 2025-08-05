@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imran.I - About</title>
+    <link rel="icon" type="image/X-icon" href="images/portfolio.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        nav {
+            padding: 1.5rem 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #2d2e32;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #007bff;
+        }
+
+        .about-section {
+            padding: 6rem 10% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: 2.8rem;
+            color: #2d2e32;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #007bff;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .profile-visual {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .skills-list {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 0;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            list-style: none;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .closing-statement {
+            background: rgba(0,123,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #007bff;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 2rem auto;
+            width: fit-content;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+        }
+
+        /* Skills Styling */
+        .skills-heading {
+            font-size: 1.8rem;
+            color: #2d2e32;
+            margin-bottom: 2rem;
+            position: relative;
+            text-align: left;
+            padding-left: 1rem;
+        }
+
+        .skills-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 1rem;
+            width: 40px;
+            height: 2px;
+            background: #007bff;
+        }
+
+        .skill-category {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .tech-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            justify-content: flex-start;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,123,255,0.1);
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(0,123,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Education Styling */
+        .education {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0,123,255,0.05);
+            border-radius: 15px;
+        }
+
+        .education-heading {
+            font-size: 1.6rem;
+            color: #2d2e32;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .education-heading::before {
+            content: '\f19d';
+            font-family: 'Font Awesome 5 Free';
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-size: 1.8rem;
+        }
+
+        .education-item {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .education-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .education-detail i {
+            color: #007bff;
+            width: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .about-section {
+                padding: 5rem 5% 2rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-visual {
+                padding: 1.5rem;
+            }
+
+            .skills-heading {
+                font-size: 1.5rem;
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .skills-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .education {
+                padding: 1rem;
+            }
+
+            .education-heading {
+                font-size: 1.4rem;
+                padding-left: 1.5rem;
+                text-align: left;
+            }
+
+            .education-heading::before {
+                font-size: 1.4rem;
+            }
+
+            .education-detail {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 0.8rem;
+            }
+
+            .tech-item {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <section class="about-section animate-on-scroll">
+        <h1 class="section-heading">About Me</h1>
+        
+        <div class="skills">
+            <div class="about-text-content">
+                <p class="about-text">
+I’m a passionate front-end developer skilled in React and Bootstrap. I’m currently expanding my skills to become a
+full stack developer, focusing on backend technologies.
+                </p>
+
+                <div class="education">
+                    <h3 class="education-heading">Education</h3>
+                    <div class="education-item">
+                        <div class="education-detail">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span class="education-title">Bachelor of Computer Science</span>
+                        </div>
+                        <div class="education-detail">
+                            <i class="fas fa-calendar"></i>
+                            <span>Sep 2022 - May 2025</span>
+                        </div>
+                        <div class="education-detail">
+                            <i class="fas fa-university"></i>
+                            <span>Thiruvalluvar University</span>
+                        </div>
+                        <div class="education-detail">
+                            <i class="fas fa-location-dot"></i>
+                            <span>Arakkonam Art’s And Science College, Arakoonam - 631060</span>
+                        </div>
+                        <div class="education-detail">
+                            <i class="fas fa-percent"></i>
+                            <span>CGPA: <span class="highlight">7.1</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="about-text">
+                    I hold a Bachelor’s degree in Computer Science, which has helped build a strong foundation in programming and
+web development.
+                </p>
+
+                <p class="closing-statement">
+                    I enjoy learning new things and pick them up quickly. I always put in my best effort to understand and grow in
+whatever I learn.
+                </p>
+            </div>
+
+            <div class="profile-visual">
+                <h3 class="skills-heading">Technical Skills</h3>
+                <ul class="skills-list">
+                    <li class="skill-item">
+                        <div class="skill-category">
+                            <span class="highlight">
+                                <i class="fas fa-code"></i>
+                                Frontend Development
+                            </span>
+                            <div class="tech-items">
+                                <span class="tech-item">
+                                    <i class="fab fa-html5"></i>
+                                    HTML5
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fab fa-css3-alt"></i>
+                                    CSS3
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fab fa-js"></i>
+                                    JavaScript
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fab fa-bootstrab"></i>
+                                    Bootstrab
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fab fa-react"></i>
+                                    React Js
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-category">
+                            <span class="highlight">
+                                <i class="fas fa-tools"></i>
+                                Other Skills
+                            </span>
+                            <div class="tech-items">
+                                <span class="tech-item">
+                                    <i class="fas fa-terminal"></i>
+                                    Prompt Engineering
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fab fa-github"></i>
+                                    Git & GitHub
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fas fa-file-word"></i>
+                                    MS Word
+                                </span>
+                                <span class="tech-item">
+                                    <i class="fas fa-file-excel"></i>
+                                    MS Excel
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="projects.html" class="cta-button">
+            Explore My Work
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

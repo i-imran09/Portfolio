@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imran Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    nav {
+      padding: 1.5rem 10%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #2d2e32;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #007bff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #007bff;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 150px 10% 100px;
+      gap: 5rem;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      min-height: 100vh;
+    }
+
+    .hero img {
+      width: 400px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
+      animation: float 4s ease-in-out infinite;
+      border: 5px solid #fff;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .small-heading {
+      font-size: 1.2rem;
+      color: #007bff;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .big-heading {
+      font-size: 3.5rem;
+      margin: 1rem 0;
+      color: #2d2e32;
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .sub-heading {
+      font-size: 1.8rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 5%;
+      }
+
+      .hero {
+        padding: 120px 5% 60px;
+        text-align: center;
+      }
+
+      .hero img {
+        width: 280px;
+      }
+
+      .big-heading {
+        font-size: 2.5rem;
+      }
+
+      .sub-heading {
+        font-size: 1.4rem;
+      }
+
+      .cta-button {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+    </ul>
+  </nav>
+<br>
+<br>
+  <section style="text-align:center; padding: 60px 10%; background-color: #f1f3f5;">
+    <h2 style="font-size: 2rem; color: #2d2e32;">🚧 Projects are not available now</h2>
+    <p style="color: #555; font-size: 1.1rem; max-width: 700px; margin: 1rem auto;">
+      Sorry for the inconvenience. I'm currently updating and working on my projects.
+      They will be displayed here once they're ready to showcase!
+    </p>
+    <p style="margin-top: 20px; font-size: 1rem; color: #888;">
+      Stay tuned! 🚀
+    </p>
+  </section>
+
+  <footer style="text-align: center; padding: 30px 10%; background: #fff; border-top: 1px solid #ddd; margin-top: 40px;">
+  </footer>
+
+</body>
+</html>
